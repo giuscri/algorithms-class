@@ -4,7 +4,7 @@
 
 void printArray_int (int *A, int A_length) {
 	int i;
-	for (i = 0; i < A_length; i++) {
+	for (i = 0; i < A_length; i = i + 1) {
 		printf("Element %d: %3d\n", i, A[i]);
 	}
 	return;
@@ -17,10 +17,10 @@ void merge (int *A, int p, int q, int r) {
 	int *L = malloc(sizeof(int) * (L_length + 1));
 	int *R = malloc(sizeof(int) * (R_length + 1));
 	int i, j;
-	for (i = 0; i < L_length; i++) {
+	for (i = 0; i < L_length; i = i + 1) {
 		L[i] = A[p + i];
 	}
-	for (j = 0; j < R_length; j++) {
+	for (j = 0; j < R_length; j = j + 1) {
 		R[j] = A[q + 1 + j];
 	}
 	L[L_length] = R[R_length] = INT_MAX;
