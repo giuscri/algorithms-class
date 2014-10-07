@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 
 void printArray_int (int *A, int A_length) {
 	int i;
@@ -23,9 +22,32 @@ void merge (int *A, int p, int q, int r) {
 	for (j = 0; j < R_length; j++) {
 		R[j] = A[q + 1 + j];
 	}
-	L[L_length] = R[R_length] = INT_MAX;
 	int k;
 	for (k = p, i = 0, j = 0; k < subA_length;) {
+		// If there's no value for the array
+		// on the left, consume every value
+		// from the right array and copy them
+		// into A
+		if (i >= L_length) {
+			for (; k < subA_length && j < R_length;) {
+				A[k] = R[j];
+				k =  k + 1;
+				j =  j + 1;
+			}
+			break;
+		}
+		// If there's no value for the array
+		// on the right, consume every value
+		// from the left array and copy them
+		// into A
+		if (j >= R_length) {
+			for (; k < subA_length && i < L_length;) {
+				A[k] = L[i];
+				k = k + 1;
+				i = i + 1;
+			}
+			break;
+		}
 		// If the lower value is on the left
 		// array, copy it into A and move
 		// to the next value
