@@ -26,6 +26,7 @@ void resizearray_Int(int **v, int v_length, int desired_length) {
 	for (int i = 0; i < desired_length; i++) {
 		tmp[i] = (*v)[i];
 	}
+	free(*v);
 	*v = tmp;
 }
 
