@@ -2,17 +2,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void printarraywithcondition_Int(int *v, int v_length, bool (*condition)(int,int)) {
-	printf("[ ");
-	for (int i = 0; i < v_length; i++) {
-		if (!condition(v[i], 0)) {
-			printf("%d ", v[i]);
-		}
-	}
-	printf("]");
-
-}
-
 void printarray_Int(int *v, int v_length) {
 	printf("[ ");
 	for (int i = 0; i < v_length; i++) {
@@ -22,7 +11,14 @@ void printarray_Int(int *v, int v_length) {
 }
 
 int main () {
-	int in_number = 512125;
+	printf("Type in a number: ");
+	int in_number;
+	#ifdef DEBUG
+		in_number = 123;
+		printf("%d\n", in_number);
+	#else
+		scanf("%d", &in_number);
+	#endif
 	// Count the number of digits via dividing
 	// by 10. The number of times needed to
 	// obtain 0, is the number of digits
@@ -48,6 +44,7 @@ int main () {
 		}
 	}
 	#ifdef DEBUG
+		printf("[DEBUG] digits: ");
 		printarray_Int(digits, digits_length);
 		printf("\n");
 	#endif
@@ -73,7 +70,7 @@ int main () {
 				// ... save it into duplicates!
 				if (!already_in) {
 					#ifdef DEBUG
-						printf("%d already in!\n", digits[i]);
+						printf("[DEBUG] %d already in!\n", digits[i]);
 					#endif
 					duplicates[i] = digits[i];
 					break;
@@ -81,17 +78,29 @@ int main () {
 			}
 		}
 	}
-	// Print the second array
-	#ifdef DEBUG
-		printarray_Int(duplicates, digits_length);
-		printf("\n");
-	#endif
-	bool equals_Int (int a, int b) { return a == b;	}
-	bool (*fptr)(int,int);
-	fptr = &equals_Int;
-	//fptr = &(bool equals_Int (int a, int b) { return a == b; });
-	printarraywithcondition_Int(duplicates, duplicates_length, fptr);
-	printf("\n");
+	bool duplicates_empty = true;
+	for (int i = 0; i < duplicates_length; i++) {
+		if (duplicates[i] != 0) {
+			duplicates_empty = false;
+			break;
+		}
+	}
+	// Print the second array if there are duplicates
+	if (!duplicates_empty) {
+		printf("Initial number has duplicates.\n");
+		//printarray_Int(duplicates, duplicates_length);
+		//printf("\n");
+		printf("[ ");
+		for (int i = 0; i < duplicates_length; i++) {
+			if (duplicates[i] != 0) {
+				printf("%d ", duplicates[i]);
+			}
+		}
+		printf("]\n");
+	}
+	else {
+		printf("Initiali number has NO duplicates.\n");
+	}
 	free(duplicates);
 	free(digits);
 	return 0;
