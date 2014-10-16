@@ -63,5 +63,11 @@ int main () {
 	printmatrix_Int(m, rows, cols);
 	// Missing tests ...
 	//...
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			free(m[j]);
+		}
+	}
+	free(m);
 	return 0;
 }
