@@ -95,8 +95,8 @@ bool equal_Dictionary (const Dictionary *d1, const Dictionary *d2) {
 int main () {
 	Dictionary *d1 = initdictionary();
 	Dictionary *d2 = initdictionary();
-	char *s1 = "attore";
-	char *s2 = "teatro";
+	char *s1 = "bfoofaroo";
+	char *s2 = "foobarfoo";
 	filldictionarywith(d1, s1, strlen(s1));
 	filldictionarywith(d2, s2, strlen(s2));
 	assert(equal_Dictionary(d1, d2));
