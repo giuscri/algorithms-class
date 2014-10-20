@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct {
 	char *name;
@@ -57,7 +58,7 @@ void delete_AddressBook (AddressBook *ab) {
 	free(ab);
 }
 
-void insertentryintoaddressbook (Entry *e, AddressBook **ab) {
+void insertentryintoaddressbook (Entry *e, AddressBook **ab, int (*cb) (const char*, const char*)) {
 	AddressBook *tmp = calloc(1, sizeof(AddressBook));
 	size_t ab_length = (*ab)->length;
 	tmp->length = ab_length + 1;
@@ -67,7 +68,26 @@ void insertentryintoaddressbook (Entry *e, AddressBook **ab) {
 	}
 	delete_AddressBook(*ab);
 	*ab = tmp;
-	(*ab)->entries[(*ab)->length - 1] = e;
+	//(*ab)->entries[(*ab)->length - 1] = e;
+	if ((*ab)->length < 2) {
+		(*ab)->entries[0] = e;
+	}
+	else {
+		bool entryinserted = false;
+		for (int i = 0; i < (*ab)->length; i++) {
+			if (cb(e->name, (*ab)->entries[i]->name) < 0) {
+				for (int j = (*ab)->length - 2; j >= i; j--) {
+					(*ab)->entries[j + 1] = (*ab)->entries[j];
+				}
+				(*ab)->entries[i] = e;
+				entryinserted = true;
+				break;
+			}
+		}
+		if (!entryinserted) {
+			(*ab)->entries[(*ab)->length - 1] = e;
+		}
+	}
 }
 
 int main () {
@@ -107,7 +127,7 @@ int main () {
 				phonenumber[howmany_Char -1] = '\0';
 			}
 			e = create_Entry(name, phonenumber);
-			insertentryintoaddressbook(e, &ab);
+			insertentryintoaddressbook(e, &ab, &strcmp);
 			free(name);
 			free(phonenumber);
 			free(line);
