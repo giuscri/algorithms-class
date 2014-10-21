@@ -1,7 +1,10 @@
-CC=gcc
+CC=cc
 DESTDIR=build/
 
-all: power prime sumofvectors sumofmatrix clean grind
+all: power prime sumofvectors sumofmatrix garibald collatz clean
+
+collatz: Vector_Int.o Vector_Collatz.o collatz.o
+	mkdir -p build/; $(CC) $? --output build/$@
 
 power: power.o
 	mkdir -p build/; $(CC) $? --output build/$@
@@ -15,8 +18,11 @@ sumofvectors: Vector_Int.o sumofvectors.o
 sumofmatrix: Vector_Int.o Matrix_Int.o sumofmatrix.o
 	mkdir -p build/; $(CC) $? --output build/$@
 
+garibald: garibald.o
+	mkdir -p build/; $(CC) $? --output build/$@
+
 grind:
-	./grind.sh
+	bash grind.sh
 
 clean:
 	rm -rf *.o
