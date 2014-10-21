@@ -1,0 +1,18 @@
+language: c
+
+compiler: gcc
+
+install:
+        sudo apt-get install valgrind
+
+script:
+        - make DESTDIR=build/
+        - make clean
+        #...
+
+after_script:
+        cd build/
+        for file in $(ls build/); do;
+                valgrind --leak-check=full --show-reachable=yes \
+                        --error-exitcode=1 $file
+        done;
