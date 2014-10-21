@@ -2,6 +2,10 @@ language: c
 
 compiler: gcc
 
+branches:
+        only:
+                - letio03
+
 install:
         sudo apt-get install valgrind
 
