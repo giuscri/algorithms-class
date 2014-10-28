@@ -2,7 +2,7 @@ CC=cc
 CFLAGS=-Wall -ansi
 LDFLAGS=-lm
 
-all: splittime swap reverse upper rectangleplayground
+all: splittime swap reverse upper rectangleplayground smallest max_secondmax
 
 smallest: smallest.o
 	mkdir -p builds; $(CC) $(CFLAGS) $? --output builds/$@
