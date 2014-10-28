@@ -1,7 +1,7 @@
-#include "Vector_Int.h"
+#ifndef _MATRIX_INT_H
+#define _MATRIX_INT_H
 
-#ifndef MATRIX_INT_H
-#define MATRIX_INT_H
+#include "Vector_Int.h"
 typedef struct {
 	Vector_Int **elements;
 	int n;

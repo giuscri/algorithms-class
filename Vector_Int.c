@@ -44,3 +44,36 @@ Vector_Int *sum_Vector_Int (const Vector_Int *v, const Vector_Int *w) {
 	}
 	return z;
 }
+
+void stretch_Vector_Int (Vector_Int **v) {
+	Vector_Int *w = new_Vector_Int((*v)->length + 1, ({
+		int __fn__ () { return 0; }
+		__fn__;
+	}));
+	int i;
+	for (i =  0; i < (*v)->length; i++) {
+		w->elements[i] = (*v)->elements[i];
+	}
+	delete_Vector_Int(*v);
+	*v = w;
+}
+
+void push_Vector_Int (Vector_Int **v, int element) {
+	stretch_Vector_Int(v);
+	(*v)->elements[(*v)->length - 1] = element;
+}
+
+int pop_Vector_Int (Vector_Int **v) {
+	Vector_Int *w = new_Vector_Int((*v)->length, ({
+		int __fn__ () { return 0; }
+		__fn__;
+	}));
+	int poppedvalue = (*v)->elements[(*v)->length - 1];
+	int i = 0;
+	for (i = 0; i < (*v)->length - 1; i++) {
+		w->elements[i] = (*v)->elements[i];
+	}
+	delete_Vector_Int(*v);
+	*v = w;
+	return poppedvalue;
+}
