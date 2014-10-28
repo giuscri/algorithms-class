@@ -1,0 +1,23 @@
+language: c
+
+compiler: gcc
+
+branches:
+        only:
+                - letio04
+
+install:
+        sudo apt-get install valgrind
+
+script:
+        - make
+        - make clean
+        #...
+
+after_script:
+        - cd build/
+        - for file in $(ls builds/); do;
+                valgrind --leak-check=full --show-reachable=yes \
+                        --error-exitcode=1 $file
+          done;
+
