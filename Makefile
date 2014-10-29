@@ -2,7 +2,14 @@ CC=gcc
 CFLAGS=-Wall -ansi -g
 LDFLAGS=-lm
 
-all: splittime swap reverse upper rectangleplayground smallest max_secondmax
+all: splittime swap reverse upper rectangleplayground smallest max_secondmax \
+	palindrome
+
+palindrome: palindrome.o
+	mkdir -p builds; $(CC) $(CFLAGS) $? --output builds/$@
+
+palindrome.o: palindrome.c
+	$(CC) $(CFLAGS) -c $?
 
 smallest: smallest.o
 	mkdir -p builds; $(CC) $(CFLAGS) $? --output builds/$@
