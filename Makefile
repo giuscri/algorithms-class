@@ -23,13 +23,19 @@ max_secondmax: max_secondmax.o
 max_secondmax.o: max_secondmax.c
 	$(CC) $(CFLAGS) -c $?
 
-rectangleplayground: rectangleplayground.o Point_Int.o Rectangle_Int.o
+rectangleplayground: rectangleplayground.o Point_Double.o Rectangle_Double.o
 	mkdir -p builds; $(CC) $(CFLAGS) $? --output builds/$@ $(LDFLAGS)
 
 rectangleplayground.o: rectangleplayground.c
 	$(CC) $(CFLAGS) -c $?
 
+Rectangle_Double.o: Rectangle_Double.c
+	$(CC) $(CFLAGS) -c $?
+
 Rectangle_Int.o: Rectangle_Int.c
+	$(CC) $(CFLAGS) -c $?
+
+Point_Double.o: Point_Double.c
 	$(CC) $(CFLAGS) -c $?
 
 Point_Int.o: Point_Int.c
