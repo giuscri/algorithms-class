@@ -1,5 +1,5 @@
-CC=cc
-CFLAGS=-Wall -ansi
+CC=gcc
+CFLAGS=-Wall -ansi -g
 LDFLAGS=-lm
 
 all: splittime swap reverse upper rectangleplayground smallest max_secondmax
@@ -17,7 +17,7 @@ max_secondmax.o: max_secondmax.c
 	$(CC) $(CFLAGS) -c $?
 
 rectangleplayground: rectangleplayground.o Point_Int.o Rectangle_Int.o
-	mkdir -p builds; $(CC) $(CFLAGS) $(LDFLAGS) $? --output builds/$@
+	mkdir -p builds; $(CC) $(CFLAGS) $? --output builds/$@ $(LDFLAGS)
 
 rectangleplayground.o: rectangleplayground.c
 	$(CC) $(CFLAGS) -c $?

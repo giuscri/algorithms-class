@@ -22,5 +22,7 @@ int main () {
 	assert(h == 0 && m == 1 && s == 0 && "split_time(60, ...) call failed.");
 	split_time((long int)136, &h, &m, &s);
 	assert(h == 0 && m == 2 && s == 16 && "split_time(136, ...) call failed.");
+	split_time((long int)86401, &h, &m, &s);
+	assert(h == 24 && m == 0 && s == 1 && "split_time(86401, ...) call failed.");
 	return 0;
 }
