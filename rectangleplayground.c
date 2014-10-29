@@ -6,8 +6,6 @@
 
 int main () {
 	Rectangle_Double *r = new_Rectangle_Double(new_Point_Double(0., 0.), new_Point_Double(2., 4.));
-	print_Rectangle_Double(r);
-	printf("\n");
 	assert(computearea_Rectangle_Double(r) == (size_t)8 && "Computing area test failed.");
 	Point_Double *c = new_Point_Double(1., 2.);
 	Point_Double *cc = computecenter_Rectangle_Double(r);
@@ -17,8 +15,6 @@ int main () {
 	delete_Point_Double(c);
 	c = new_Point_Double(1., 1.);
 	cc = computecenter_Rectangle_Double(r);
-	print_Rectangle_Double(r);
-	printf("\n");
 	assert(equal_Point_Double(c, cc) && "Computing center test -- after shift -- failed.");
 	delete_Point_Double(c);
 	c = new_Point_Double(3., 5.);
