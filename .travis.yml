@@ -17,8 +17,7 @@ script:
 after_script:
         - cd builds/
         - for file in $(ls); do
-                valgrind --leak-check=full --show-reachable=yes \
-                        --error-exitcode=1 $file;
+                valgrind --leak-check=full --show-reachable=yes --error-exitcode=1 ./$file;
           done
         - cd ..
 
